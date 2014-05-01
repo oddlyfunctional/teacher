@@ -2,25 +2,30 @@ require 'teacher/version'
 
 require 'treetop'
 
-require 'scope'
-require 'function'
-require 'nodes'
+require 'teacher/scope'
+require 'teacher/function'
+require 'teacher/nodes'
+
+Treetop.load("grammar/teacher")
 
 module Teacher
 
-  attr_accessor :scope
+  class Base
 
-  def initialize(input)
-    @tree = parse(input)
-    @scope = TopLevel.new
-  end
+    attr_accessor :scope
 
-  def run
-    @tree.eval(scope)
-  end
+    def initialize
+      @parser = TeacherParser.new
+    end
 
-  def parse(string)
-    @parser ||= TeacherParser.new
-    @parser.parse(string)
+    def run(string)
+      @scope = TopLevel.new
+      @tree = parse(string)
+      @tree.eval(scope)
+    end
+
+    def parse(string)
+      @parser.parse(string)
+    end
   end
 end

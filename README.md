@@ -31,12 +31,14 @@ fg=(3*(2*e1+2*e2+3*e3)/7+t)/4
 pub(fg)
 ```
 
-Parsing:
+Interpreting the language:
 ```
-parser = GradeCalculatorParser.new
-scope = TopLevel.new
+require 'teacher'
 
-parser.parse(input).eval(scope)
+teacher = Teacher::Base.new
+
+teacher.run(File.read("example.teacher"))
+scope = teacher.scope
 
 scope.published_variables["e1"] # => 8.0
 scope.symbols["e1"] # => 8.0
