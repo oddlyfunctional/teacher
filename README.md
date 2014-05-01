@@ -7,7 +7,9 @@ that replaces the lowest score and a homework (hw). The final grade (fg)
 is given by the following calculation: ```fg=(3*(2*e1+2*e2+3*e3)/7+hw)/4```.
 
 Example:
+
 | e1  | e2  | e3  | re  | hw  | fg   |
+| --- | --- | --- | --- | --- | ---- |
 | 8.0 | 6.0 | 4.0 | 6.0 | 6.0 | 6.43 |
 
 How can you describe this problem?
