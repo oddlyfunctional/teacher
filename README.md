@@ -1,8 +1,12 @@
-# Grade Calculator
+# Teacher Language
 Flexible language for defining grades calculations.
 
 ## How to use
-Consider the following input:
+Let's say you have three exams (e1, e2 and e3), a replacement exam (re) that replaces the lowest score and a homework (hw). The final grade (fg) is given by the following calculation: ```fg=(3*(2*e1+2*e2+3*e3)/7+t)/4```.
+
+How can you describe this problem?
+
+Consider the following code:
 ```
 # Assign values to variables
 e1=8
