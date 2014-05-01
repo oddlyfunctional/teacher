@@ -1,18 +1,18 @@
 e1=8
 e2=6
 e3=4
-t=6
+hw=6
 re=6
 
 pub(e1)
 pub(e2)
 pub(e3)
-pub(t)
+pub(hw)
 pub(re)
 
 smaller=min(e1,e2,e3)
 
 sub(smaller,re)
 
-fg=(3*(2*e1+2*e2+3*e3)/7+t)/4
+fg=(3*(2*e1+2*e2+3*e3)/7+hw)/4
 pub(fg)
