@@ -1,0 +1,93 @@
+# Based on http://floris.briolas.nl/floris/2008/07/simple-calculator-with-antlr/comment-page-1/
+
+grammar GradeCalculator
+  rule program
+    statement* <Program>
+  end
+
+  rule statement
+    (expression newline / assignment newline) <Statement> / newline
+  end
+
+  rule expression
+    function_call / additive
+  end
+
+  rule newline
+    "\r"? "\n" { def eval(scope); end }
+  end
+
+  rule assignment
+    identifier "=" expression <Assignment>
+  end
+
+  rule additive
+    operand_1:multitive operator:additive_operator operand_2:additive <BinaryOperation>
+    /
+    multitive
+  end
+
+  rule additive_operator
+    '+' {
+      def apply(a, b)
+        a + b
+      end
+    }
+    /
+    '-' {
+      def apply(a, b)
+        a - b
+      end
+    }
+  end
+
+  rule multitive
+    operand_1:atom operator:multitive_operator operand_2:multitive <BinaryOperation>
+    /
+    atom
+  end
+
+  rule multitive_operator
+    '*' {
+      def apply(a, b)
+        a * b
+      end
+    }
+    /
+    '/' {
+      def apply(a, b)
+        a / b
+      end
+    }
+  end
+
+  rule function_call
+    name:identifier "(" abc:list? ")" <FunctionCall>
+  end
+
+  rule list
+    (expression "," list+ <List>)
+    /
+    expression
+  end
+
+  rule group
+    "(" additive ")" <Group>
+  end
+
+  rule number
+    [0-9]+ <Number>
+  end
+
+  rule identifier
+    [a-zA-Z]+ [a-zA-Z_0-9]* <Identifier>
+  end
+
+  rule space
+    [ \t]* <Space>
+  end
+
+  rule atom
+    number / identifier / group
+  end
+end
