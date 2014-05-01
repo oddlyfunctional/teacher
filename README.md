@@ -2,9 +2,10 @@
 Flexible language for defining grades calculations.
 
 ## How to use
-Let's say you have three exams (e1, e2 and e3), a replacement exam (re)
-that replaces the lowest score and a homework (hw). The final grade (fg)
-is given by the following calculation: ```fg=(3*(2*e1+2*e2+3*e3)/7+hw)/4```.
+Let's say you have some really complex calculations to do for every student:
+there's three exams (e1, e2 and e3), a homework (hw) and a replacement exam 
+(re) that replaces the lowest score. The final grade (fg) is given by the
+following calculation: ```fg=(3*(2*e1+2*e2+3*e3)/7+hw)/4```.
 
 Example:
 
@@ -12,7 +13,9 @@ Example:
 | --- | --- | --- | --- | --- | ---- |
 | 8.0 | 6.0 | 4.0 | 6.0 | 6.0 | 6.43 |
 
-How can you describe this problem?
+How could you describe this problem in a clear, flexible way? Would you 
+simply hard-code this particular solution? What if any user of your system 
+could create their own arbitrary solution?
 
 Consider the following code:
 ```
@@ -46,11 +49,20 @@ pub(fg)
 Interpreting the language:
 ```
 require 'teacher'
+require 'csv'
 
 teacher = Teacher::Base.new
 
 teacher.run(File.read("example.teacher"))
 scope = teacher.scope
+
+CSV.generate do |csv|
+  csv << scope.published_variables.keys
+  csv << scope.published_variables.values
+end
+
+# => e1, e2, e3, hw, re, fg
+#    8.0,6.0,4.0,6.0,6.0,6.428571428571429
 
 scope.published_variables["e1"] # => 8.0
 scope.symbols["e1"] # => 8.0
@@ -67,7 +79,7 @@ scope.symbols["hw"] # => 6.0
 scope.published_variables["re"] # => 6.0
 scope.symbols["re"] # => 6.0
 
-scope.symbols["smaller"] # => identificador "e3"
+scope.symbols["smaller"] # => "e3" identifier
 
 scope.published_variables["fg"] # => 6.428571428571429
 scope.symbols["fg"] # => 6.428571428571429
