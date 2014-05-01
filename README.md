@@ -1,5 +1,5 @@
 # Grade Calculator
-Flexible language for defining grade calculations.
+Flexible language for defining grades calculations.
 
 ## How to use
 Consider the following input:
