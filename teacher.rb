@@ -1,4 +1,4 @@
-module GradeCalculator
+module Teacher
 
   class Scope
 

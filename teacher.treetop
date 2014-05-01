@@ -1,6 +1,6 @@
 # Based on http://floris.briolas.nl/floris/2008/07/simple-calculator-with-antlr/comment-page-1/
 
-grammar GradeCalculator
+grammar Teacher
   rule program
     statement* <Program>
   end
