@@ -5,6 +5,10 @@ module Teacher
     end
   end
 
+  class Comment < Treetop::Runtime::SyntaxNode
+    def eval(s); puts "COWABONGA!"; end
+  end
+
   module Number
     def eval(scope); text_value.to_f; end
   end
@@ -20,7 +24,7 @@ module Teacher
   end
 
   class Space < Treetop::Runtime::SyntaxNode
-    def eval(scope);  end
+    def eval(scope); end
   end
 
   class BinaryOperation < Treetop::Runtime::SyntaxNode

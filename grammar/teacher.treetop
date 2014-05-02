@@ -6,15 +6,21 @@ grammar Teacher
   end
 
   rule statement
-    (expression newline / assignment newline) <Statement> / newline
+    (expression newline / assignment newline) <Statement>
+    / comment
+    / newline
   end
 
   rule expression
     function_call / additive
   end
 
+  rule comment
+    "#" ( !newline . )* newline { def eval(s); end }
+  end
+
   rule newline
-    "\r"? "\n" { def eval(scope); end }
+    "\r"? "\n" { def eval(s); end }
   end
 
   rule assignment
@@ -62,7 +68,7 @@ grammar Teacher
   end
 
   rule function_call
-    name:identifier "(" abc:list? ")" <FunctionCall>
+    name:identifier "(" list? ")" <FunctionCall>
   end
 
   rule list
@@ -83,8 +89,8 @@ grammar Teacher
     [a-zA-Z]+ [a-zA-Z_0-9]* <Identifier>
   end
 
-  rule space
-    [ \t]* <Space>
+  rule s
+    [ \t] #<Space>
   end
 
   rule atom
