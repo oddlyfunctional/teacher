@@ -64,23 +64,19 @@ end
 # => e1, e2, e3, hw, re, fg
 #    8.0,6.0,4.0,6.0,6.0,6.428571428571429
 
-scope.published_variables["e1"] # => 8.0
-scope.symbols["e1"] # => 8.0
-
-scope.published_variables["e2"] # => 6.0
-scope.symbols["e2"] # => 6.0
-
-scope.published_variables["e3"] # => 4.0
-scope.symbols["e3"] # => 4.0
-
-scope.published_variables["hw"] # => 6.0
-scope.symbols["hw"] # => 6.0
-
-scope.published_variables["re"] # => 6.0
-scope.symbols["re"] # => 6.0
-
-scope.symbols["smaller"] # => "e3" identifier
-
-scope.published_variables["fg"] # => 6.428571428571429
-scope.symbols["fg"] # => 6.428571428571429
+scope.published_variables # => {"e1"=>8.0,
+                          #     "e2"=>6.0,
+                          #     "e3"=>4.0,
+                          #     "hw"=>6.0,
+                          #     "re"=>6.0,
+                          #     "fg"=>6.428571428571429}
+                          
+scope.symbols # => { ...
+              #     "e1"=>8.0,
+              #     "e2"=>6.0,
+              #     "e3"=>6.0,
+              #     "hw"=>6.0,
+              #     "re"=>6.0,
+              #     "smaller"=> Identifier (e3 = 4.0),
+              #     "fg"=>6.428571428571429}
 ```

@@ -5,26 +5,24 @@ module Teacher
     end
   end
 
-  class Comment < Treetop::Runtime::SyntaxNode
-    def eval(s); puts "COWABONGA!"; end
-  end
-
   module Number
     def eval(scope); text_value.to_f; end
   end
 
   class Identifier < Treetop::Runtime::SyntaxNode
-    def eval(scope); scope[text_value]; end
+    def eval(scope)
+      @value = scope[text_value]
+    end
+
+    def inspect
+      "Identifier (#{text_value} = #{@value})\n" + super
+    end
   end
 
   module Statement
     def eval(scope)
       elements.first.eval(scope)
     end
-  end
-
-  class Space < Treetop::Runtime::SyntaxNode
-    def eval(scope); end
   end
 
   class BinaryOperation < Treetop::Runtime::SyntaxNode
